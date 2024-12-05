@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/proxy.js": {
+      "runtime": "nodejs16.x"  // or "nodejs18.x", depending on your desired version
+    }
+  }
+}
