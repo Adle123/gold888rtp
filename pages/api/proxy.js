@@ -1,18 +1,17 @@
+export const runtime = 'edge';
+
 export default async function handler(req, res) {
-    const targetUrl = `https://gold888rtp.pics${req.url}`;
-    const response = await fetch(targetUrl, {
-      method: req.method,
-      headers: {
-        ...req.headers,
-        host: "gold888rtp.pics",
-      },
-      body: req.method !== "GET" ? JSON.stringify(req.body) : null,
-    });
-  
-    const responseBody = await response.text();
-    response.headers.forEach((value, key) => {
-      res.setHeader(key, value);
-    });
-    res.status(response.status).send(responseBody);
+  const targetUrl = 'https://gold888rtp.pics';
+
+  // Fetch the target URL's content
+  const response = await fetch(targetUrl);
+
+  // If the request was successful, return the response content
+  if (response.ok) {
+    const body = await response.text(); // or response.json() if the target returns JSON
+    return res.status(200).send(body); // Return the content to the client
+  } else {
+    // Handle errors, if the target site fails to respond
+    return res.status(500).json({ error: 'Failed to fetch content' });
   }
-  
+}
